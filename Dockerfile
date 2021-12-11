@@ -7,7 +7,7 @@ WORKDIR /app
 ENV CGO_ENABLED=0
 
 COPY . .
-RUN go build -ldflags "-s -w" -o app *.go
+RUN go build -ldflags "-s -w" -o app cmd/*.go
 
 FROM scratch
 
