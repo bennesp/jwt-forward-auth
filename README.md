@@ -33,6 +33,7 @@ services:
 
 - `ADDRESS` (default is `:8080`): address where the http server will listen to
 - `LOG_LEVEL` (default is `info`): one between trace, debug, info, warn or warning, error, fatal, and panic
+- `CLAIM_MAPPINGS` (default is `sub:x-jwt-user-id,iss:x-jwt-issuer`): a comma separated list of claim mappings, where the first one is the claim name in the JWT and the second one is the header name to be used in the http response
 
 ### Read JWT from a header
 

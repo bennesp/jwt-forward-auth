@@ -90,11 +90,14 @@ func getKeyFunc(config *Config) (jwt.Keyfunc, error) {
 func (jwtWrapper *JwtWrapper) Verify(jwtAsString string) (*jwt.Token, error) {
 	log.WithField("jwt", jwtAsString).Debugf("Verifying JWT")
 
-	claims := &jwt.RegisteredClaims{}
-	token, err := jwt.ParseWithClaims(jwtAsString, claims, jwtWrapper.keyFunc)
+	token, err := jwt.Parse(jwtAsString, jwtWrapper.keyFunc)
 	if err != nil {
 		return nil, err
 	}
 
 	return token, nil
+}
+
+func (jwtWrapper *JwtWrapper) GetClaims(token *jwt.Token) jwt.MapClaims {
+	return token.Claims.(jwt.MapClaims)
 }

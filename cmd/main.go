@@ -46,6 +46,6 @@ func main() {
 		return
 	}
 
-	server := server.New(source, jwtWrapper)
+	server := server.New(source, jwtWrapper, config.ClaimMapping)
 	server.Start(config.Address)
 }

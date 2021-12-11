@@ -12,14 +12,16 @@ import (
 )
 
 type Server struct {
-	source     sources.Source
-	jwtWrapper *jwt.JwtWrapper
+	source       sources.Source
+	jwtWrapper   *jwt.JwtWrapper
+	claimMapping map[string]string
 }
 
-func New(source sources.Source, jwtWrapper *jwt.JwtWrapper) *Server {
+func New(source sources.Source, jwtWrapper *jwt.JwtWrapper, claimMapping map[string]string) *Server {
 	return &Server{
-		source:     source,
-		jwtWrapper: jwtWrapper,
+		source:       source,
+		jwtWrapper:   jwtWrapper,
+		claimMapping: claimMapping,
 	}
 }
 

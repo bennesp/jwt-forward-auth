@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,5 +31,9 @@ func (ctx *Server) handleGet(c *gin.Context) {
 		return
 	}
 
+	claims := ctx.jwtWrapper.GetClaims(token)
+	for key, value := range ctx.claimMapping {
+		c.Header(value, fmt.Sprintf("%v", claims[key]))
+	}
 	c.Status(http.StatusOK)
 }
