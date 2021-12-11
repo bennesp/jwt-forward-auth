@@ -3,17 +3,17 @@ package sources
 import "github.com/gin-gonic/gin"
 
 type CookieSource struct {
-	cookieName string
+	Name string
 }
 
-func NewCookieSource(cookieName string) *CookieSource {
+func NewCookieSource(name string) *CookieSource {
 	return &CookieSource{
-		cookieName: cookieName,
+		Name: name,
 	}
 }
 
 func (s *CookieSource) RetrieveJwt(c *gin.Context) (string, error) {
-	cookie, err := c.Request.Cookie(s.cookieName)
+	cookie, err := c.Request.Cookie(s.Name)
 	if err != nil {
 		return "", err
 	}

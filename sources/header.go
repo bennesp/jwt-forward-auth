@@ -8,24 +8,24 @@ import (
 )
 
 type HeaderSource struct {
-	headerName        string
-	headerValuePrefix string
+	Name   string
+	Prefix string
 }
 
-func NewHeaderSource(headerName, headerValuePrefix string) *HeaderSource {
+func NewHeaderSource(Name, Prefix string) *HeaderSource {
 	return &HeaderSource{
-		headerName:        headerName,
-		headerValuePrefix: headerValuePrefix,
+		Name:   Name,
+		Prefix: Prefix,
 	}
 }
 
 func (s *HeaderSource) RetrieveJwt(c *gin.Context) (string, error) {
-	header := c.Request.Header.Get(s.headerName)
+	header := c.Request.Header.Get(s.Name)
 
 	if header == "" {
-		err := fmt.Errorf("no '%s' header", s.headerName)
+		err := fmt.Errorf("no '%s' header", s.Name)
 		return "", err
 	}
 
-	return strings.TrimPrefix(header, s.headerValuePrefix), nil
+	return strings.TrimPrefix(header, s.Prefix), nil
 }
