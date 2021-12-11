@@ -56,6 +56,7 @@ func main() {
 		log.SetLevel(l)
 	}
 
+	log.Info("Initializing jwt (could take a couple of seconds if we have to fetch keys from a JWKS URL)...")
 	jwtWrapper, err := jwt.New()
 	if err != nil {
 		log.WithError(err).Fatal("Cannot instantiate JWT wrapper. Exiting")
