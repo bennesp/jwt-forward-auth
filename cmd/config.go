@@ -5,7 +5,7 @@ import (
 )
 
 type Config struct {
-	Port     int    `env:"PORT" envDefault:"8080"`
+	Address  string `env:"ADDRESS" envDefault:":8080"`
 	LogLevel string `env:"LOG_LEVEL" envDefault:"info"`
 
 	HeaderJwtSourceEnabled bool   `env:"HEADER_JWT_SOURCE_ENABLED" envDefault:"true"`

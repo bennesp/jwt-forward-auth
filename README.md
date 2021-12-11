@@ -31,7 +31,7 @@ services:
 
 ### General
 
-- `PORT` (default is `8080`): port where the http server will listen to
+- `ADDRESS` (default is `:8080`): address where the http server will listen to
 - `LOG_LEVEL` (default is `info`): one between trace, debug, info, warn or warning, error, fatal, and panic
 
 ### Read JWT from a header

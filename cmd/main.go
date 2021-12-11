@@ -36,5 +36,5 @@ func main() {
 	}
 
 	server := server.New(source, jwtWrapper)
-	server.Start(config.Port)
+	server.Start(config.Address)
 }
