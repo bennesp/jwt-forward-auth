@@ -36,7 +36,7 @@ and `docker-compose up -d`
 
 ### With kubernetes
 
-See [examples/kubernetes](examples/kubernetes/README.md)
+See [examples/kubernetes](examples/kubernetes)
 
 ## Environment variables
 
