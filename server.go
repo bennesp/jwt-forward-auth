@@ -43,13 +43,17 @@ type Context struct {
 }
 
 func main() {
-	log.SetLevel(log.DebugLevel)
-	log.Info("Retrieving jwt configuration...")
-
 	config, err := loadConfig()
 	if err != nil {
 		log.WithError(err).Fatal("Cannot load configuration. Exiting")
 		return
+	}
+
+	l, err := log.ParseLevel(config.LogLevel)
+	if err != nil {
+		log.WithError(err).Error("Cannot parse log level")
+	} else {
+		log.SetLevel(l)
 	}
 
 	jwtWrapper, err := jwt.New()
