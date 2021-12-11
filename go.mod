@@ -1,4 +1,4 @@
-module github.com/bennesp/traefik-jwt-forward-auth
+module github.com/bennesp/jwt-forward-auth
 
 go 1.17
 

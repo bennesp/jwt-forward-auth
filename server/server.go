@@ -5,8 +5,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/bennesp/traefik-jwt-forward-auth/services/jwt"
-	"github.com/bennesp/traefik-jwt-forward-auth/sources"
+	"github.com/bennesp/jwt-forward-auth/services/jwt"
+	"github.com/bennesp/jwt-forward-auth/sources"
 	"github.com/gin-gonic/gin"
 	ginlogrus "github.com/toorop/gin-logrus"
 )

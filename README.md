@@ -13,14 +13,14 @@ You can test all the examples with something like:
 
 With docker:
 ```sh
-docker run --rm -ti -e JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json' -e JWKS_REFRESH_UNKNOWN_KID=false -p 8080:8080 ghcr.io/bennesp/traefik-jwt-forward-auth:latest
+docker run --rm -ti -e JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json' -e JWKS_REFRESH_UNKNOWN_KID=false -p 8080:8080 ghcr.io/bennesp/jwt-forward-auth:latest
 ```
 
 With docker-compose:
 ```yaml
 services:
   jwt:
-    image: ghcr.io/bennesp/traefik-jwt-forward-auth:latest
+    image: ghcr.io/bennesp/jwt-forward-auth:latest
     ports:
       - "8080:8080"
     environment:

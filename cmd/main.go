@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/bennesp/traefik-jwt-forward-auth/server"
-	"github.com/bennesp/traefik-jwt-forward-auth/services/jwt"
-	"github.com/bennesp/traefik-jwt-forward-auth/sources"
+	"github.com/bennesp/jwt-forward-auth/server"
+	"github.com/bennesp/jwt-forward-auth/services/jwt"
+	"github.com/bennesp/jwt-forward-auth/sources"
 	"github.com/gin-gonic/gin"
 
 	log "github.com/sirupsen/logrus"
