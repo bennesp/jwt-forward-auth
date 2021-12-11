@@ -8,6 +8,7 @@ import (
 	"github.com/bennesp/traefik-jwt-forward-auth/services/jwt"
 	"github.com/bennesp/traefik-jwt-forward-auth/sources"
 	"github.com/gin-gonic/gin"
+	ginlogrus "github.com/toorop/gin-logrus"
 )
 
 type Server struct {
@@ -25,7 +26,9 @@ func New(source sources.Source, jwtWrapper *jwt.JwtWrapper) *Server {
 func (ctx *Server) Start(address string) {
 	log.Infof("Starting server on port %s...", address)
 
-	r := gin.Default()
+	logger := log.New()
+	r := gin.New()
+	r.Use(ginlogrus.Logger(logger), gin.Recovery())
 	r.GET("/", ctx.handleGet)
 
 	http.ListenAndServe(address, r)
