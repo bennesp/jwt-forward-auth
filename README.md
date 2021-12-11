@@ -6,18 +6,23 @@ It implements both JWKS (with both asymmetric RSA/ECDSA/... keys and symmetric O
 
 It can read jwt from headers and cookies and it can be extended to read it from anywhere (just write a sources/source.go file).
 
+Can be used in conjunction with traefik and forwardAuth middleware (See [examples/kubernetes](examples/kubernetes/README.md)).
+
 ## Quick Start
 
 You can test all the examples with something like:
 `curl -vv -H "Authorization: Bearer eyJraWQiOiJiZGM4N2Y2YyIsInR5cCI6IkpXVCIsImFsZyI6IkVTMjU2In0.eyJzdWIiOiJEaW1pdHJ5IiwiYXVkIjoiUnVzbGFuIiwiaXNzIjoiandrcy1zZXJ2aWNlLmFwcHNwb3QuY29tIiwiaWF0IjoxNjM5MTc4NTIyfQ.h9l2jd_kV33NQ8ygqsqAyi0iwhR_8bTp8fObRhB-BJ1xkItA2VIb135ww1BNmzMaL4Hs6FO553oJkmfwnYhx-Q" localhost:8080`
 
-With docker:
+### With docker
+
 ```sh
 docker run --rm -ti -e JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json' -e JWKS_REFRESH_UNKNOWN_KID=false -p 8080:8080 ghcr.io/bennesp/jwt-forward-auth:latest
 ```
 
-With docker-compose:
+### With docker-compose
+
 ```yaml
+# docker-compose.yaml
 services:
   jwt:
     image: ghcr.io/bennesp/jwt-forward-auth:latest
@@ -26,6 +31,12 @@ services:
     environment:
       - JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json'
 ```
+
+and `docker-compose up -d`
+
+### With kubernetes
+
+See [examples/kubernetes](examples/kubernetes/README.md)
 
 ## Environment variables
 

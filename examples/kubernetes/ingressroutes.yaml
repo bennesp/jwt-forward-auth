@@ -1,0 +1,17 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`localhost`) && PathPrefix("/")
+      kind: Rule
+      services:
+        - kind: Service
+          name: whoami
+          port: 80
+      middlewares:
+        - name: auth

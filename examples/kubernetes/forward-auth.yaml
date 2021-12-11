@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forward-auth
+spec:
+  selector:
+    matchLabels:
+      app: forward-auth
+  template:
+    metadata:
+      labels:
+        app: forward-auth
+    spec:
+      containers:
+      - name: forward-auth
+        image: ghcr.io/bennesp/jwt-forward-auth
+        ports:
+        - containerPort: 8080
+        env:
+          - name: JWKS_URL
+            value: http://dex:5556/dex/keys
+          - name: CLAIM_MAPPINGS
+            value: name:jwt-token-name,email_verified:jwt-email-verified
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forward-auth
+spec:
+  selector:
+    app: forward-auth
+  ports:
+  - port: 8080
