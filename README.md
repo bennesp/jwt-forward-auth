@@ -27,8 +27,8 @@ It can read jwt from headers and cookies and it can be extended to read it from 
 
 - `JWKS_ENABLED` (default is `true`): If true, validation with JWKS is enabled
 - `JWKS_URL` (default is `""`): URL of the keys of your IdP. For example https://jwks-service.appspot.com/.well-known/jwks.json
-- `JWKS_REFRESH_INTERVAL` (default is `1h`): Interval between the refresh of the keys.
-- `JWKS_REFRESH_RATE_LIMIT` (default is `5m`): Rate limit for the refresh of the keys.
+- `JWKS_REFRESH_INTERVAL` (default is `1h`): Interval between the refresh of the keys. Disable setting it to 0.
+- `JWKS_REFRESH_RATE_LIMIT` (default is `5m`): Rate limit for the refresh of the keys. Max refresh interval (if `JWKS_REFRESH_UNKNOWN_KID` is true). Does not make sense to have `JWKS_REFRESH_INTERVAL` shorter than this.
 - `JWKS_REFRESH_TIMEOUT` (default is `5s`): Timeout for the refresh of the keys.
 - `JWKS_REFRESH_UNKNOWN_KID` (default is `true`): If true, unknown kid will be refreshed.
 
