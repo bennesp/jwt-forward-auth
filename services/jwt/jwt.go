@@ -21,6 +21,14 @@ func New() (*JwtWrapper, error) {
 		return nil, err
 	}
 
+	if config.JwtSecretEnabled && config.JwtSecret == "" {
+		return nil, errors.New("jwt secret is enabled but no secret is set")
+	}
+
+	if config.JwksEnabled && config.JwksUrl == "" {
+		return nil, errors.New("jwks is enabled but no secret is set")
+	}
+
 	keyFunc, err := getKeyFunc(config)
 	if err != nil {
 		return nil, err
@@ -38,12 +46,12 @@ func isValidUrl(str string) bool {
 }
 
 func getKeyFunc(config *Config) (jwt.Keyfunc, error) {
-	if config.JwtSecret == "" && config.JwksUrl == "" {
-		return nil, errors.New("no JWT_SECRET or JWT_JWKS_URL provided")
+	if !config.JwksEnabled && !config.JwtSecretEnabled {
+		return nil, errors.New("no secret or jwks enabled")
 	}
 
-	if config.JwksUrl == "" || !isValidUrl(config.JwksUrl) {
-		log.Info("JWT_JWKS_URL not found or invalid, using only JWT_SECRET")
+	if !config.JwksEnabled || !isValidUrl(config.JwksUrl) {
+		log.Warn("Jwks not enabled or invalid URL, fallback using only JWT_SECRET")
 		keyFunc := func(t *jwt.Token) (interface{}, error) {
 			return []byte(config.JwtSecret), nil
 		}
@@ -68,8 +76,8 @@ func getKeyFunc(config *Config) (jwt.Keyfunc, error) {
 
 	return func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Header["kid"]; !ok {
-			if config.JwtSecret == "" {
-				return nil, errors.New("no 'kid' found in jwt and no JWT_SECRET provided, cannot validate")
+			if config.JwtSecretEnabled {
+				return nil, errors.New("no 'kid' found in jwt and jwt secret disabled, cannot validate")
 			}
 
 			return []byte(config.JwtSecret), nil

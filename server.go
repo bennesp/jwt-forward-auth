@@ -59,14 +59,14 @@ func main() {
 	}
 
 	var source sources.Source
-	if config.CookieJwtSource {
+	if config.CookieJwtSourceEnabled {
 		source = sources.NewCookieSource(config.CookieJwtSourceName)
 	}
-	if config.HeaderJwtSource {
+	if config.HeaderJwtSourceEnabled {
 		source = sources.NewHeaderSource(config.HeaderJwtSourceName, config.HeaderJwtSourcePrefix)
 	}
 
-	if source == nil || config.CookieJwtSource == config.HeaderJwtSource {
+	if source == nil || config.CookieJwtSourceEnabled == config.HeaderJwtSourceEnabled {
 		log.Fatal("Exactly one between Header source or Cookie source must be enabled")
 		return
 	}

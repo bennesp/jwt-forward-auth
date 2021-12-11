@@ -7,20 +7,21 @@ import (
 )
 
 type Config struct {
+	JwksEnabled           bool          `env:"JWKS_ENABLED" envDefault:"true"`
 	JwksUrl               string        `env:"JWKS_URL" envDefault:""`
-	JwksRefreshInterval   time.Duration `env:"JWKS_RefreshInterval" envDefault:"1h"`
-	JwksRefreshRateLimit  time.Duration `env:"JWKS_RefreshRateLimit" envDefault:"5m"`
-	JwksRefreshTimeout    time.Duration `env:"JWKS_RefreshTimeout" envDefault:"5s"`
-	JwksRefreshUnknownKID bool          `env:"JWKS_RefreshUnknownKID" envDefault:"true"`
+	JwksRefreshInterval   time.Duration `env:"JWKS_REFRESH_INTERVAL" envDefault:"1h"`
+	JwksRefreshRateLimit  time.Duration `env:"JWKS_REFRESH_RATE_LIMIT" envDefault:"5m"`
+	JwksRefreshTimeout    time.Duration `env:"JWKS_REFRESH_TIMEOUT" envDefault:"5s"`
+	JwksRefreshUnknownKID bool          `env:"JWKS_REFRESH_UNKNOWN_KID" envDefault:"true"`
 
-	JwtSecret string `env:"SECRET" envDefault:""`
+	JwtSecretEnabled bool   `env:"JWT_SECRET_ENABLED" envDefault:"false"`
+	JwtSecret        string `env:"JWT_SECRET" envDefault:""`
 }
 
 func loadConfig() (*Config, error) {
 	config := &Config{}
 	err := env.Parse(config, env.Options{
 		RequiredIfNoDef: true,
-		Prefix:          "JWT_",
 	})
 
 	if err != nil {
