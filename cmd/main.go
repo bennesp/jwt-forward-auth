@@ -4,6 +4,7 @@ import (
 	"github.com/bennesp/traefik-jwt-forward-auth/server"
 	"github.com/bennesp/traefik-jwt-forward-auth/services/jwt"
 	"github.com/bennesp/traefik-jwt-forward-auth/sources"
+	"github.com/gin-gonic/gin"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -13,6 +14,16 @@ func main() {
 	if err != nil {
 		log.WithError(err).Fatal("Cannot load configuration. Exiting")
 		return
+	}
+
+	l, err := log.ParseLevel(config.LogLevel)
+	if err != nil {
+		log.WithError(err).Error("Cannot parse log level")
+	} else {
+		log.SetLevel(l)
+	}
+	if l != log.DebugLevel {
+		gin.SetMode(gin.ReleaseMode)
 	}
 
 	log.Info("Initializing jwt (could take a couple of seconds if we have to fetch keys from a JWKS URL)...")
