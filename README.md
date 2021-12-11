@@ -1,4 +1,4 @@
-# Jwt Micro-Service
+# Jwt µService
 
 Simple http server that can receive a JWT in the http request and answer with a 200 if the JWT is valid, 401 otherwise.
 
@@ -13,14 +13,14 @@ You can test all the examples with something like:
 
 With docker:
 ```sh
-docker run --rm -ti -e JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json' -e JWKS_REFRESH_UNKNOWN_KID=false -p 8080:8080 ghcr.io/bennesp/jwt-micro-service:latest
+docker run --rm -ti -e JWKS_URL='https://jwks-service.appspot.com/.well-known/jwks.json' -e JWKS_REFRESH_UNKNOWN_KID=false -p 8080:8080 ghcr.io/bennesp/traefik-jwt-forward-auth:latest
 ```
 
 With docker-compose:
 ```yaml
 services:
   jwt:
-    image: ghcr.io/bennesp/jwt-micro-service:latest
+    image: ghcr.io/bennesp/traefik-jwt-forward-auth:latest
     ports:
       - "8080:8080"
     environment:
