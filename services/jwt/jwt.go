@@ -26,7 +26,7 @@ func New() (*JwtWrapper, error) {
 	}
 
 	if config.JwksEnabled && config.JwksUrl == "" {
-		return nil, errors.New("jwks is enabled but no secret is set")
+		return nil, errors.New("jwks is enabled but no jwks url is set")
 	}
 
 	keyFunc, err := getKeyFunc(config)
