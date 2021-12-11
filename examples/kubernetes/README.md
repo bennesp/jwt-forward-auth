@@ -1,4 +1,4 @@
-This examples takes for granted that you have:
+This example takes for granted that you have:
 - a traefik deployment
 - a dex deployment
 
