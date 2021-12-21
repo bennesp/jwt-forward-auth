@@ -76,7 +76,7 @@ func getKeyFunc(config *Config) (jwt.Keyfunc, error) {
 
 	return func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Header["kid"]; !ok {
-			if config.JwtSecretEnabled {
+			if !config.JwtSecretEnabled {
 				return nil, errors.New("no 'kid' found in jwt and jwt secret disabled, cannot validate")
 			}
 
